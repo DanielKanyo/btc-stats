@@ -23,7 +23,8 @@ function Header() {
             <Group>
                 <ActionIcon
                     onClick={() => setColorScheme(computedColorScheme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT)}
-                    variant="default"
+                    variant="light"
+                    color="gray"
                     size="xl"
                     aria-label="Toggle color scheme"
                     radius="lg"
