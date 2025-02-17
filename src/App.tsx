@@ -1,8 +1,8 @@
+import { AppShell } from "@mantine/core";
+import { useHeadroom } from "@mantine/hooks";
 
-import { AppShell } from '@mantine/core';
-import { useHeadroom } from '@mantine/hooks';
-import Header from './components/Header';
-import './App.css';
+import "./App.css";
+import Header from "./components/Header";
 
 function App() {
     const pinned = useHeadroom({ fixedAt: 120 });
@@ -13,11 +13,9 @@ function App() {
                 <Header />
             </AppShell.Header>
 
-            <AppShell.Main pt={96}>
-                Main
-            </AppShell.Main>
+            <AppShell.Main pt={96}>Main</AppShell.Main>
         </AppShell>
-    )
+    );
 }
 
 export default App;
