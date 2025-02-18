@@ -22,7 +22,7 @@ function Main({ stats }: MainProps) {
         if (data?.blocks_24h) {
             const seconds = tmp / data.blocks_24h;
 
-            return `${Math.floor(seconds / 60)}m ${Math.round(seconds % 60)}s`;
+            return `~${Math.floor(seconds / 60)}m ${Math.round(seconds % 60)}s`;
         }
 
         return undefined;
