@@ -24,6 +24,7 @@ function App() {
                 }
 
                 const result: Stats = await response.json();
+
                 setStats(result);
             } catch (err) {
                 console.error(err);

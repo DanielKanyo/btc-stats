@@ -12,22 +12,40 @@ interface MainProps {
 function Main({ stats }: MainProps) {
     const data = stats?.data;
 
-    const circulation = useMemo(() => {
-        return data?.circulation ? Math.round(data.circulation / 100000000) : 0;
+    // const circulation = useMemo(() => {
+    //     return data?.circulation ? Math.round(data.circulation / 100000000) : 0;
+    // }, [data]);
+
+    const avgTimeBetweenBlocks = useMemo(() => {
+        const tmp = 86400; // 24 hours in seconds
+
+        if (data?.blocks_24h) {
+            const seconds = tmp / data.blocks_24h;
+
+            return `${Math.floor(seconds / 60)}m ${Math.round(seconds % 60)}s`;
+        }
+
+        return undefined;
     }, [data]);
 
     return (
         <Grid>
-            <Grid.Col span={8}>
+            <Grid.Col span={9}>
                 <Grid>
                     <Grid.Col span={4}>
-                        <SimpleStatCard label="Current Price" value={data?.market_price_usd} prefix="$" format />
+                        <SimpleStatCard
+                            label="Current Price"
+                            value={data?.market_price_usd}
+                            diff={data?.market_price_usd_change_24h_percentage}
+                            prefix="$"
+                            format
+                        />
                     </Grid.Col>
                     <Grid.Col span={4}>
                         <SimpleStatCard label="Latest Block" value={data?.blocks} format />
                     </Grid.Col>
                     <Grid.Col span={4}>
-                        <SimpleStatCard label="Coins in Circulation" value={circulation} format />
+                        <SimpleStatCard label="Average time between blocks" value={avgTimeBetweenBlocks} />
                     </Grid.Col>
                     <Grid.Col>
                         <Card shadow="xl" padding="lg" radius="lg">
