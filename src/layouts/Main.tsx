@@ -42,7 +42,7 @@ function Main({ stats }: MainProps) {
                         />
                     </Grid.Col>
                     <Grid.Col span={4}>
-                        <SimpleStatCard label="Latest Block" value={data?.blocks} format />
+                        <SimpleStatCard label="Latest Block" value={data?.best_block_height} format />
                     </Grid.Col>
                     <Grid.Col span={4}>
                         <SimpleStatCard label="Average time between blocks" value={avgTimeBetweenBlocks} />

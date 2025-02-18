@@ -23,7 +23,7 @@ function SimpleStatCard({ label, value, prefix, format, diff }: StatCardProps) {
                         </Text>
                         {diff ? (
                             <Text c={diff > 0 ? "teal" : "red"} fz="sm" fw={500} lh={1} style={{ display: "flex", alignItems: "center" }}>
-                                <span>{diff}%</span>
+                                <span>{diff.toFixed(2)}%</span>
                                 {diff > 0 ? <IconArrowUpRight size={16} stroke={1.5} /> : <IconArrowDownRight size={16} stroke={1.5} />}
                             </Text>
                         ) : null}
