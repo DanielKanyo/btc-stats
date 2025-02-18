@@ -31,8 +31,8 @@ function SimpleStatCard({ label, value, prefix, format, change }: StatCardProps)
                 </>
             ) : (
                 <>
-                    <Skeleton height={14} mb={12} radius="lg" w="40%" />
-                    <Skeleton height={42} radius="lg" w="80%" />
+                    <Skeleton height={14} mb={12} radius="md" w="40%" />
+                    <Skeleton height={42} radius="md" w="80%" />
                 </>
             )}
         </Card>
