@@ -13,6 +13,8 @@ interface CurrentPriceDto {
 interface MarketDataDto {
     current_price: CurrentPriceDto;
     price_change_percentage_24h: number;
+    max_supply: number;
+    total_supply: number;
 }
 
 export interface CoinGeckoStatsDto {
@@ -33,4 +35,6 @@ export interface Stats {
     priceChangePercentage24h: number;
     bestBlockheight: number;
     blocks24h: number;
+    maxSupply: number;
+    totalSupply: number;
 }
