@@ -68,6 +68,8 @@ function Chart() {
                     <SegmentedControl
                         w={180}
                         radius="md"
+                        color="teal"
+                        bg="transparent"
                         withItemsBorders={false}
                         value={numberOfDays}
                         onChange={setNumberOfDays}
