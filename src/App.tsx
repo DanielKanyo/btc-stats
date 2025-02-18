@@ -6,13 +6,13 @@ import { useHeadroom } from "@mantine/hooks";
 import "./App.css";
 import Header from "./layouts/Header";
 import Main from "./layouts/Main";
-import { Stats } from "./types/Stats";
+import { StatsDto } from "./types/Data";
 
 const BLOCKCHAIR_ENDPOINT = "https://api.blockchair.com/bitcoin/stats";
 
 function App() {
     const pinned = useHeadroom({ fixedAt: 120 });
-    const [stats, setStats] = useState<Stats | null>(null);
+    const [stats, setStats] = useState<StatsDto | null>(null);
 
     useEffect(() => {
         const fetchData = async (): Promise<void> => {
@@ -23,7 +23,7 @@ function App() {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
 
-                const result: Stats = await response.json();
+                const result: StatsDto = await response.json();
 
                 setStats(result);
             } catch (err) {

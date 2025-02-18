@@ -2,11 +2,12 @@ import { useMemo } from "react";
 
 import { Card, Grid } from "@mantine/core";
 
+import Chart from "../components/Chart/Chart";
 import SimpleStatCard from "../components/SimpleStatCard";
-import { Stats } from "../types/Stats";
+import { StatsDto } from "../types/Data";
 
 interface MainProps {
-    stats: Stats | null;
+    stats: StatsDto | null;
 }
 
 function Main({ stats }: MainProps) {
@@ -36,7 +37,7 @@ function Main({ stats }: MainProps) {
                         <SimpleStatCard
                             label="Current Price"
                             value={data?.market_price_usd}
-                            diff={data?.market_price_usd_change_24h_percentage}
+                            change={data?.market_price_usd_change_24h_percentage}
                             prefix="$"
                             format
                         />
@@ -48,8 +49,8 @@ function Main({ stats }: MainProps) {
                         <SimpleStatCard label="Average time between blocks" value={avgTimeBetweenBlocks} />
                     </Grid.Col>
                     <Grid.Col>
-                        <Card shadow="xl" padding="lg" radius="lg">
-                            d
+                        <Card shadow="xl" p="xl" radius="lg">
+                            <Chart />
                         </Card>
                     </Grid.Col>
                 </Grid>
