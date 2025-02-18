@@ -14,7 +14,7 @@ interface MarketDataDto {
     current_price: CurrentPriceDto;
     price_change_percentage_24h: number;
     max_supply: number;
-    total_supply: number;
+    circulating_supply: number;
 }
 
 export interface CoinGeckoStatsDto {
@@ -24,6 +24,7 @@ export interface CoinGeckoStatsDto {
 interface Data {
     best_block_height: number;
     blocks_24h: number;
+    market_dominance_percentage: number;
 }
 
 export interface BlockChairStatsDto {
@@ -36,5 +37,6 @@ export interface Stats {
     bestBlockheight: number;
     blocks24h: number;
     maxSupply: number;
-    totalSupply: number;
+    circulatingSupply: number;
+    marketDominancePercentage: number;
 }

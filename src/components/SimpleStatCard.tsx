@@ -11,7 +11,7 @@ interface StatCardProps {
 
 function SimpleStatCard({ label, value, prefix, format, change }: StatCardProps) {
     return (
-        <Card shadow="xl" padding="xl" radius="lg">
+        <Card shadow="xl" padding="xl" radius="md">
             {value != null ? (
                 <>
                     <Text fz="sm" tt="uppercase" fw={600} lh={1} mb={12} c="gray.6">

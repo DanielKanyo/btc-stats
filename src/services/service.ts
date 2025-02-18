@@ -11,7 +11,8 @@ function mapStatsDtoToStats(cg: CoinGeckoStatsDto, bc: BlockChairStatsDto): Stat
         bestBlockheight: bc.data.best_block_height,
         blocks24h: bc.data.blocks_24h,
         maxSupply: cg.market_data.max_supply,
-        totalSupply: cg.market_data.total_supply,
+        circulatingSupply: cg.market_data.circulating_supply,
+        marketDominancePercentage: bc.data.market_dominance_percentage,
     };
 }
 
@@ -27,7 +28,7 @@ export const fetchBtcStats = async (): Promise<Stats | null> => {
         const result1: CoinGeckoStatsDto = await coinGeckoResponse.json();
         const result2: BlockChairStatsDto = await blockChairResponse.json();
 
-        console.log(result1);
+        // console.log(result1, result2);
 
         return mapStatsDtoToStats(result1, result2);
     } catch (error) {

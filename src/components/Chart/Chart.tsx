@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 import { AreaChart } from "@mantine/charts";
-import { Flex, Group, SegmentedControl, Text } from "@mantine/core";
+import { Flex, Group, SegmentedControl, Skeleton, Text } from "@mantine/core";
 import { IconArrowDownRight, IconArrowUpRight } from "@tabler/icons-react";
 
 import { fetchBtcChartData } from "../../services/service";
@@ -35,6 +35,23 @@ function Chart() {
         return { min: Math.min(...values), max: Math.max(...values) };
     }, [data]);
 
+    if (!data.length) {
+        return (
+            <>
+                <Flex pb="xl" justify="flex-end" align="center">
+                    <Group justify="space-between" w="100%">
+                        <div>
+                            <Skeleton height={14} mb={10} radius="md" w={100} />
+                            <Skeleton height={18} radius="md" w={90} />
+                        </div>
+                        <Skeleton height={42} radius="md" w={180} />
+                    </Group>
+                </Flex>
+                <Skeleton height={250} radius="md" w="100%" />
+            </>
+        );
+    }
+
     return (
         <>
             <Flex pb="xl" justify="flex-end" align="center">
@@ -50,7 +67,7 @@ function Chart() {
                     </div>
                     <SegmentedControl
                         w={180}
-                        radius="xl"
+                        radius="md"
                         withItemsBorders={false}
                         value={numberOfDays}
                         onChange={setNumberOfDays}

@@ -24,8 +24,8 @@ function Main({ stats }: MainProps) {
     }, [stats]);
 
     const coinsLeft = useMemo(() => {
-        if (stats && stats.totalSupply && stats.maxSupply) {
-            return 100 - ((stats.maxSupply - stats.totalSupply) / stats.totalSupply) * 100;
+        if (stats && stats.circulatingSupply && stats.maxSupply) {
+            return 100 - ((stats.maxSupply - stats.circulatingSupply) / stats.circulatingSupply) * 100;
         }
 
         return 0;
@@ -51,29 +51,44 @@ function Main({ stats }: MainProps) {
                         <SimpleStatCard label="Average time between blocks" value={avgTimeBetweenBlocks} />
                     </Grid.Col>
                     <Grid.Col>
-                        <Card shadow="xl" p="xl" radius="lg">
+                        <Card shadow="xl" p="xl" radius="md">
                             <Chart />
                         </Card>
                     </Grid.Col>
                     <Grid.Col span={6}>
-                        <Card shadow="xl" p="xl" radius="lg">
+                        <Card shadow="xl" p="xl" radius="md">
                             <Text fz="sm" tt="uppercase" fw={600} lh={1} mb={12} c="gray.6">
                                 Circulation
                             </Text>
                             <Group align="baseline">
                                 <Text fz={42} fw={500} lh={1}>
-                                    <NumberFormatter value={stats?.totalSupply} thousandSeparator />
+                                    <NumberFormatter value={stats?.circulatingSupply} thousandSeparator />
                                 </Text>
+                                <span>/</span>
                                 <Text fz={26} fw={500} lh={1} c="gray.6">
-                                    / <NumberFormatter value={stats?.maxSupply} thousandSeparator />
+                                    <NumberFormatter value={stats?.maxSupply} thousandSeparator />
                                 </Text>
                             </Group>
-                            <Progress value={coinsLeft} mt="xl" size="md" radius="xl" color="yellow" />
+                            <Progress value={coinsLeft} mt="xl" size="sm" radius="md" color="teal" />
                         </Card>
                     </Grid.Col>
                     <Grid.Col span={6}>
-                        <Card shadow="xl" p="xl" radius="lg">
-                            b
+                        <Card shadow="xl" p="xl" radius="md">
+                            <Text fz="sm" tt="uppercase" fw={600} lh={1} mb={12} c="gray.6">
+                                Market Dominance
+                            </Text>
+                            <Group align="baseline">
+                                <Text fz={42} fw={500} lh={1}>
+                                    <NumberFormatter value={stats?.marketDominancePercentage} thousandSeparator />%
+                                </Text>
+                            </Group>
+                            <Progress
+                                value={stats?.marketDominancePercentage ? stats.marketDominancePercentage : 0}
+                                mt="xl"
+                                size="sm"
+                                radius="md"
+                                color="teal"
+                            />
                         </Card>
                     </Grid.Col>
                 </Grid>
@@ -81,12 +96,12 @@ function Main({ stats }: MainProps) {
             <Grid.Col span="auto">
                 <Grid>
                     <Grid.Col>
-                        <Card shadow="xl" padding="lg" radius="lg">
+                        <Card shadow="xl" padding="lg" radius="md">
                             1
                         </Card>
                     </Grid.Col>
                     <Grid.Col>
-                        <Card shadow="xl" padding="lg" radius="lg">
+                        <Card shadow="xl" padding="lg" radius="md">
                             2
                         </Card>
                     </Grid.Col>

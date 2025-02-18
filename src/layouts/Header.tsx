@@ -13,7 +13,7 @@ function Header() {
     const computedColorScheme = useComputedColorScheme(THEMES.LIGHT, { getInitialValueInEffect: true });
 
     return (
-        <Group px="xl" h="100%" justify="space-between">
+        <Group px="md" h="100%" justify="space-between">
             <Flex h="100%" gap="md" justify="center" align="center">
                 <Image h={54} src={btcLogo} alt="BTC Logo" />
                 <Text size="xl" tt="uppercase" fw={700}>
@@ -27,7 +27,7 @@ function Header() {
                     color="gray"
                     size="xl"
                     aria-label="Toggle color scheme"
-                    radius="lg"
+                    radius="md"
                 >
                     {computedColorScheme === THEMES.DARK ? <IconSun /> : <IconMoon />}
                 </ActionIcon>
