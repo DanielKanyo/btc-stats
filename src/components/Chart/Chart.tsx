@@ -4,10 +4,9 @@ import { AreaChart } from "@mantine/charts";
 import { Flex, Group, SegmentedControl, Text } from "@mantine/core";
 import { IconArrowDownRight, IconArrowUpRight } from "@tabler/icons-react";
 
-import { mapPriceDtoToPrice, Price, PriceDto } from "../../types/Data";
+import { fetchBtcChartData } from "../../services/service";
+import { Price } from "../../types/Data";
 import classes from "./style.module.css";
-
-const COINGECKO_ENDPOINT = "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&interval=daily";
 
 function Chart() {
     const [data, setData] = useState<Price[]>([]);
@@ -16,26 +15,14 @@ function Chart() {
 
     useEffect(() => {
         const fetchData = async (): Promise<void> => {
-            try {
-                const response = await fetch(`${COINGECKO_ENDPOINT}&days=${numberOfDays}`);
+            const prices = await fetchBtcChartData(numberOfDays);
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
+            if (prices && prices.length) {
+                const first = prices[0].v;
+                const last = prices[prices.length - 1].v;
 
-                const result: PriceDto = await response.json();
-                const prices = mapPriceDtoToPrice(result);
-
-                if (prices.length) {
-                    const first = prices[0].v;
-                    const last = prices[prices.length - 1].v;
-
-                    setChange(((last - first) / first) * 100);
-                }
-
+                setChange(((last - first) / first) * 100);
                 setData(prices);
-            } catch (err) {
-                console.error(err);
             }
         };
 

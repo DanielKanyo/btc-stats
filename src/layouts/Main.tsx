@@ -4,30 +4,24 @@ import { Card, Grid } from "@mantine/core";
 
 import Chart from "../components/Chart/Chart";
 import SimpleStatCard from "../components/SimpleStatCard";
-import { StatsDto } from "../types/Data";
+import { Stats } from "../types/Data";
 
 interface MainProps {
-    stats: StatsDto | null;
+    stats: Stats | null;
 }
 
 function Main({ stats }: MainProps) {
-    const data = stats?.data;
-
-    // const circulation = useMemo(() => {
-    //     return data?.circulation ? Math.round(data.circulation / 100000000) : 0;
-    // }, [data]);
-
     const avgTimeBetweenBlocks = useMemo(() => {
         const tmp = 86400; // 24 hours in seconds
 
-        if (data?.blocks_24h) {
-            const seconds = tmp / data.blocks_24h;
+        if (stats?.blocks24h) {
+            const seconds = tmp / stats.blocks24h;
 
             return `~${Math.floor(seconds / 60)}m ${Math.round(seconds % 60)}s`;
         }
 
         return undefined;
-    }, [data]);
+    }, [stats]);
 
     return (
         <Grid>
@@ -36,14 +30,14 @@ function Main({ stats }: MainProps) {
                     <Grid.Col span={4}>
                         <SimpleStatCard
                             label="Current Price"
-                            value={data?.market_price_usd}
-                            change={data?.market_price_usd_change_24h_percentage}
+                            value={stats?.currentPriceUsd}
+                            change={stats?.priceChangePercentage24h}
                             prefix="$"
                             format
                         />
                     </Grid.Col>
                     <Grid.Col span={4}>
-                        <SimpleStatCard label="Latest Block" value={data?.best_block_height} format />
+                        <SimpleStatCard label="Latest Block" value={stats?.bestBlockheight} format />
                     </Grid.Col>
                     <Grid.Col span={4}>
                         <SimpleStatCard label="Average time between blocks" value={avgTimeBetweenBlocks} />

@@ -1,15 +1,3 @@
-interface Data {
-    market_price_usd: number;
-    best_block_height: number;
-    circulation: number;
-    blocks_24h: number;
-    market_price_usd_change_24h_percentage: number;
-}
-
-export interface StatsDto {
-    data: Data;
-}
-
 export interface PriceDto {
     prices: [number, number][];
 }
@@ -19,6 +7,30 @@ export interface Price {
     v: number;
 }
 
-export function mapPriceDtoToPrice(data: PriceDto): Price[] {
-    return data.prices.map(([timestamp, value]) => ({ t: timestamp, v: value }));
+interface CurrentPriceDto {
+    usd: number;
+}
+interface MarketDataDto {
+    current_price: CurrentPriceDto;
+    price_change_percentage_24h: number;
+}
+
+export interface CoinGeckoStatsDto {
+    market_data: MarketDataDto;
+}
+
+interface Data {
+    best_block_height: number;
+    blocks_24h: number;
+}
+
+export interface BlockChairStatsDto {
+    data: Data;
+}
+
+export interface Stats {
+    currentPriceUsd: number;
+    priceChangePercentage24h: number;
+    bestBlockheight: number;
+    blocks24h: number;
 }
