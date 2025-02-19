@@ -68,7 +68,8 @@ function Chart() {
                     <SegmentedControl
                         w={180}
                         radius="md"
-                        color="teal"
+                        color="orange"
+                        p={0}
                         bg="transparent"
                         withItemsBorders={false}
                         value={numberOfDays}
@@ -87,7 +88,7 @@ function Chart() {
                 h={250}
                 data={data}
                 dataKey="t"
-                series={[{ name: "v", color: "yellow" }]}
+                series={[{ name: "v", color: "orange" }]}
                 curveType="natural"
                 withXAxis={false}
                 withYAxis={false}
