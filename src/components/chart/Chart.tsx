@@ -1,12 +1,35 @@
 import { useEffect, useMemo, useState } from "react";
 
-import { AreaChart } from "@mantine/charts";
-import { Flex, Group, SegmentedControl, Skeleton, Text } from "@mantine/core";
+import { AreaChart, ChartTooltipProps, getFilteredChartTooltipPayload } from "@mantine/charts";
+import { Flex, Group, Paper, SegmentedControl, Skeleton, Text } from "@mantine/core";
 import { IconArrowDownRight, IconArrowUpRight } from "@tabler/icons-react";
 
 import { fetchBtcChartData } from "../../services/service";
 import { Price } from "../../types/Data";
 import classes from "./style.module.css";
+
+function ChartTooltip({ label, payload }: ChartTooltipProps) {
+    if (!payload) return null;
+
+    const ts = label as number;
+
+    const day = new Date(ts).getDate() < 10 ? `0${new Date(ts).getDate()}` : new Date(ts).getDate();
+    const month = new Date(ts).getMonth() + 1 < 10 ? `0${new Date(ts).getMonth() + 1}` : new Date(ts).getMonth() + 1;
+    const year = new Date(ts).getFullYear();
+
+    return (
+        <Paper px="md" py="sm" withBorder shadow="md" radius="md">
+            <Text fw={500} mb={5}>
+                {day}/{month}/{year}
+            </Text>
+            {getFilteredChartTooltipPayload(payload).map((item) => (
+                <Text key={item.name} c={item.color} fz="lg">
+                    ${new Intl.NumberFormat("en-US").format(item.value.toFixed(0))}
+                </Text>
+            ))}
+        </Paper>
+    );
+}
 
 function Chart() {
     const [data, setData] = useState<Price[]>([]);
@@ -88,13 +111,16 @@ function Chart() {
                 h={250}
                 data={data}
                 dataKey="t"
-                series={[{ name: "v", color: "orange" }]}
+                series={[{ name: "v", label: "Price", color: "orange" }]}
                 curveType="natural"
                 withXAxis={false}
                 withYAxis={false}
                 withDots={false}
                 gridAxis="none"
                 yAxisProps={{ domain: [domains.min, domains.max], padding: { bottom: 30, top: 10 } }}
+                tooltipProps={{
+                    content: ({ label, payload }) => <ChartTooltip label={label} payload={payload} />,
+                }}
             />
         </>
     );
