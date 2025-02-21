@@ -2,7 +2,7 @@ import { BlockChairStatsDto, CoinGeckoStatsDto, Price, PriceDto, Stats } from ".
 
 const COINGECKO_STATS_ENDPOINT = "https://api.coingecko.com/api/v3/coins/bitcoin";
 const BLOCKCHAIR_STATS_ENDPOINT = "https://api.blockchair.com/bitcoin/stats";
-const COINGECKO_CHART_DATA_ENDPOINT = "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&interval=daily";
+const COINGECKO_CHART_DATA_ENDPOINT = "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd";
 
 function mapStatsDtoToStats(cg: CoinGeckoStatsDto, bc: BlockChairStatsDto): Stats {
     return {

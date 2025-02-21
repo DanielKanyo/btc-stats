@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { Card, Grid, Group, NumberFormatter, Progress, Text } from "@mantine/core";
+import { Card, Grid, Group, NumberFormatter, Progress, Skeleton, Text } from "@mantine/core";
 
 import SimpleStatCard from "../components/SimpleStatCard";
 import Chart from "../components/chart/Chart";
@@ -57,21 +57,31 @@ function Main({ stats }: MainProps) {
                     </Grid.Col>
                     <Grid.Col span={6}>
                         <Card shadow="xl" p="xl" radius="md">
-                            <Text fz="sm" tt="uppercase" fw={600} lh={1} mb={12} c="gray.6">
-                                Circulation
-                            </Text>
-                            <Group align="baseline">
-                                <Text fz={42} fw={500} lh={1}>
-                                    <NumberFormatter value={stats?.circulatingSupply} thousandSeparator />
-                                </Text>
-                                <Text fz={26} fw={500} lh={1} c="gray.6">
-                                    /
-                                </Text>
-                                <Text fz={26} fw={500} lh={1} c="gray.6">
-                                    <NumberFormatter value={stats?.maxSupply} thousandSeparator />
-                                </Text>
-                            </Group>
-                            <Progress value={coinsLeft} mt="xl" size="sm" radius="md" color="orange" />
+                            {stats?.circulatingSupply ? (
+                                <>
+                                    <Text fz="sm" tt="uppercase" fw={600} lh={1} mb={12} c="gray.6">
+                                        Circulation
+                                    </Text>
+                                    <Group align="baseline">
+                                        <Text fz={42} fw={500} lh={1}>
+                                            <NumberFormatter value={stats?.circulatingSupply} thousandSeparator />
+                                        </Text>
+                                        <Text fz={26} fw={500} lh={1} c="gray.6">
+                                            /
+                                        </Text>
+                                        <Text fz={26} fw={500} lh={1} c="gray.6">
+                                            <NumberFormatter value={stats?.maxSupply} thousandSeparator />
+                                        </Text>
+                                    </Group>
+                                    <Progress value={coinsLeft} mt="xl" size="sm" radius="md" color="orange" />
+                                </>
+                            ) : (
+                                <>
+                                    <Skeleton height={14} mb={12} radius="md" w="40%" />
+                                    <Skeleton height={42} radius="md" w="80%" />
+                                    <Skeleton height={5} radius="md" w="100%" mt="xl" />
+                                </>
+                            )}
                         </Card>
                     </Grid.Col>
                     <Grid.Col span={6}>

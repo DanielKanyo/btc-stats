@@ -8,6 +8,13 @@ import { fetchBtcChartData } from "../../services/service";
 import { Price } from "../../types/Data";
 import classes from "./style.module.css";
 
+enum INTERVALS {
+    ONE_MONTH = "31",
+    THREE_MONTHS = "91",
+    SIX_MONTHS = "182",
+    ONE_YEAR = "365",
+}
+
 function ChartTooltip({ label, payload }: ChartTooltipProps) {
     if (!payload) return null;
 
@@ -33,7 +40,7 @@ function ChartTooltip({ label, payload }: ChartTooltipProps) {
 
 function Chart() {
     const [data, setData] = useState<Price[]>([]);
-    const [numberOfDays, setNumberOfDays] = useState<string>("365");
+    const [numberOfDays, setNumberOfDays] = useState<string>(INTERVALS.ONE_YEAR);
     const [change, setChange] = useState(0);
 
     useEffect(() => {
@@ -89,7 +96,7 @@ function Chart() {
                         </Text>
                     </div>
                     <SegmentedControl
-                        w={180}
+                        w={190}
                         radius="md"
                         color="orange"
                         p={0}
@@ -99,10 +106,10 @@ function Chart() {
                         onChange={setNumberOfDays}
                         classNames={classes}
                         data={[
-                            { label: "1M", value: "31" },
-                            { label: "3M", value: "91" },
-                            { label: "6M", value: "182" },
-                            { label: "1Y", value: "365" },
+                            { label: "1M", value: INTERVALS.ONE_MONTH },
+                            { label: "3M", value: INTERVALS.THREE_MONTHS },
+                            { label: "6M", value: INTERVALS.SIX_MONTHS },
+                            { label: "1Y", value: INTERVALS.ONE_YEAR },
                         ]}
                     />
                 </Group>
